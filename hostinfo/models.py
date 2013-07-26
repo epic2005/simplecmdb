@@ -13,6 +13,7 @@ class Host(models.Model):
     memory = models.IntegerField(max_length=8)
     sn = models.CharField(max_length=30)
     ipaddr = models.IPAddressField(max_length=15)
+    uuid = models.CharField(max_length=30)
     # def __init__(self):
     #     super(Host, self).__init__()
     def __unicode__(self):
