@@ -5,6 +5,8 @@ from django.http import HttpResponse
 
 from models import Host, HostGroup
 
+import hashlib
+
 try:
     import json
 except ImportError,e:
@@ -21,6 +23,10 @@ def collect(request):
         sn = req.POST.get('sn')
         osver = req.POST.get('osver')
         hostname = req.POST.get('hostname')
+        m = hashlib.md5()
+        m.update(req.POST.get('uuid'))
+        uuid = m.hexdigest()
+        
         try:
             host = Host.objects.get(hostname=hostname)
         except:
@@ -34,6 +40,7 @@ def collect(request):
         host.osver = osver
         host.vendor = vendor
         host.ipaddr = req.POST.get('ip')
+        host.uuid = uuid
         host.save()
         return HttpResponse("ok")
     else:
