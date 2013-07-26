@@ -11,6 +11,7 @@ class HostAdmin(admin.ModelAdmin):
         'cpu_model',
         'cpu_num',
         'sn',
+        'uuid',
         ]
 
 class IPaddrAdmin(admin.ModelAdmin):
